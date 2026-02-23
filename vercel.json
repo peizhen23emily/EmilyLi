@@ -1,0 +1,10 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "devCommand": "npm run dev",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "env": {
+    "VITE_CONTACT_EMAIL": "@emily@emilyli.com"
+  }
+}
