@@ -5,7 +5,7 @@ export default function ProjectCard({ project }) {
   return (
     <Link
       to={`/projects/${project.id}`}
-      className="group block overflow-hidden rounded-lg transition hover:shadow-lg"
+      className="group flex flex-col h-full overflow-hidden rounded-lg shadow-sm hover:shadow-lg transition bg-white"
     >
       <div className="relative overflow-hidden h-48 md:h-64">
         <img
@@ -14,11 +14,13 @@ export default function ProjectCard({ project }) {
           className="w-full h-full object-cover transition group-hover:scale-105"
         />
       </div>
-      <div className="p-6 bg-white">
+      <div className="p-6 flex flex-col flex-grow">
         <h3 className="text-lg font-semibold text-dark mb-2 group-hover:text-navy transition">
           {project.title}
         </h3>
-        <p className="text-sm text-gray-600 mb-3">{project.description}</p>
+        <p className="text-sm text-gray-600 mb-3 flex-grow">
+          {project.description}
+        </p>
         <div className="flex flex-wrap gap-2 mb-4">
           {project.tags.map((tag) => (
             <span
@@ -29,7 +31,7 @@ export default function ProjectCard({ project }) {
             </span>
           ))}
         </div>
-        <button className="text-sm font-medium text-navy hover:text-dark transition">
+        <button className="text-sm font-medium text-navy hover:text-dark transition mt-auto">
           View Project →
         </button>
       </div>

@@ -49,7 +49,7 @@ export const projects = [
   {
     id: 'project-4',
     title: 'Identity Disparities of Mainland Students Study in Hong Kong',
-    tags: ['UX Research', 'Learning Analytics'],
+    tags: ['Academic Writing', 'Critical Thinking'],
     description: 'An essay examining the discrimination and identity challenges faced by mainland Chinese students studying in Hong Kong secondary schools.',
     image: 'https://i.imgur.com/zkk7wJu.jpeg',
     pdfFile: 'Essay.pdf',
