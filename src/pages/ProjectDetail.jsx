@@ -162,7 +162,7 @@ export default function ProjectDetail() {
           <section className="mb-16">
             <h2 className="text-3xl font-bold text-dark mb-6">Key Outcomes</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {project.outcomes.map((outcome, idx) => (
+              {project.outcomes?.map((outcome, idx) => (
                 <div
                   key={idx}
                   className="p-6 bg-white rounded-lg shadow-sm border-l-4 border-navy"
@@ -213,7 +213,7 @@ export default function ProjectDetail() {
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="text-3xl font-bold mb-4">Interested in working together?</h3>
           <a
-            href="mailto:emily@emilyli.com"
+            href="mailto:peizhenli723@gmail.com"
             className="inline-block px-8 py-3 bg-cream text-navy rounded-lg font-medium hover:bg-beige transition"
           >
             Get in Touch
