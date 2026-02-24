@@ -28,8 +28,8 @@ export default function ProjectDetail() {
 
   return (
     <div className="bg-cream min-h-screen">
-      {/* Back Button */}
-      <div className="sticky top-20 z-40 bg-cream bg-opacity-95 backdrop-blur-sm border-b border-beige py-4 px-4">
+      {/* Back Button - Not Sticky */}
+      <div className="bg-cream border-b border-beige py-4 px-4">
         <div className="max-w-4xl mx-auto">
           <button
             onClick={() => navigate('/projects')}
@@ -40,20 +40,11 @@ export default function ProjectDetail() {
         </div>
       </div>
 
-      {/* Hero Image */}
-      <div className="w-full h-96 md:h-[500px] overflow-hidden">
-        <img
-          src={project.heroImage}
-          alt={project.title}
-          className="w-full h-full object-cover"
-        />
-      </div>
-
       {/* Main Content */}
       <article className="py-16 px-4">
         <div className="max-w-4xl mx-auto">
-          {/* Title and Tags */}
-          <div className="mb-12">
+          {/* Title and Tags with Shadow */}
+          <div className="mb-12 pb-8 rounded-lg shadow-md bg-white p-8 -mx-8 px-8">
             <h1 className="text-5xl font-bold text-dark mb-6">{project.title}</h1>
             <div className="flex flex-wrap gap-3">
               {project.tags.map((tag) => (
@@ -73,27 +64,54 @@ export default function ProjectDetail() {
             <p className="text-lg text-gray-700 leading-relaxed">{project.overview}</p>
           </section>
 
-          {/* Problem Statement */}
+          {/* Interactive View / Prototype */}
           <section className="mb-16 pb-16 border-b border-beige">
-            <h2 className="text-3xl font-bold text-dark mb-6">Problem Statement</h2>
-            <p className="text-lg text-gray-700 leading-relaxed">
-              {project.problemStatement}
-            </p>
-          </section>
+            <h2 className="text-3xl font-bold text-dark mb-6">Interactive View</h2>
+            
+            {/* Vanguard Redesign - Figma */}
+            {project.id === 'project-1' && (
+              <div className="w-full rounded-lg overflow-hidden shadow-md">
+                <iframe 
+                  style={{ border: '1px solid rgba(0, 0, 0, 0.1)', width: '100%', minHeight: '600px' }} 
+                  src="https://embed.figma.com/proto/2HyzlIREhEa4clYPaBhlXP/Peizhen-581-final-project?page-id=0%3A1&node-id=1-2&starting-point-node-id=1%3A2&embed-host=share" 
+                  allowFullScreen
+                  title="Vanguard Year-in-Review Redesign"
+                />
+              </div>
+            )}
 
-          {/* Process */}
-          <section className="mb-16 pb-16 border-b border-beige">
-            <h2 className="text-3xl font-bold text-dark mb-6">My Process</h2>
-            <ol className="space-y-4">
-              {project.process.map((step, idx) => (
-                <li key={idx} className="flex gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 bg-navy text-cream rounded-full flex items-center justify-center font-bold">
-                    {idx + 1}
-                  </span>
-                  <p className="text-lg text-gray-700 pt-1">{step}</p>
-                </li>
-              ))}
-            </ol>
+            {/* Physics 114 - Looker Studio */}
+            {project.id === 'project-2' && (
+              <div className="w-full rounded-lg overflow-hidden shadow-md">
+                <iframe 
+                  width="100%" 
+                  height="1000" 
+                  src="https://lookerstudio.google.com/embed/reporting/32389de7-6dd5-4e35-8cda-d0babd4948e9/page/p_m940x0vl0d" 
+                  frameBorder="0" 
+                  style={{ border: 0 }} 
+                  allowFullScreen 
+                  sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+                  title="Physics 114 Instructor Dashboard"
+                />
+              </div>
+            )}
+
+            {/* Cook Out Course - Articulate Link */}
+            {project.id === 'project-3' && (
+              <div className="bg-white p-8 rounded-lg shadow-md text-center">
+                <p className="text-lg text-gray-700 mb-6">
+                  This interactive e-learning course is built in Articulate Storyline. Click the button below to explore the course checkpoint in a new window.
+                </p>
+                <a
+                  href="https://share.articulate.com/f2jn-tLEFCV77tp8WMqdt"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-8 py-3 bg-navy text-cream rounded-lg font-medium hover:bg-dark transition"
+                >
+                  Open Interactive Course →
+                </a>
+              </div>
+            )}
           </section>
 
           {/* Project Images */}

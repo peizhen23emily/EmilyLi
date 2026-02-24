@@ -5,9 +5,12 @@ import { projects } from '../data/portfolio'
 export default function Projects() {
   const [selectedTag, setSelectedTag] = useState(null)
 
-  // Get all unique tags
-  const allTags = Array.from(
-    new Set(projects.flatMap((project) => project.tags))
+  // Limited tag filter - only show these tags
+  const allowedTags = ['UI Design', 'UX Research', 'Data Visualization', 'Instructional Design', 'Prototyping']
+  
+  // Get unique tags that are in the allowed list
+  const displayTags = allowedTags.filter(tag =>
+    projects.some(project => project.tags.includes(tag))
   )
 
   // Filter projects by selected tag
@@ -38,7 +41,7 @@ export default function Projects() {
           >
             All
           </button>
-          {allTags.map((tag) => (
+          {displayTags.map((tag) => (
             <button
               key={tag}
               onClick={() => setSelectedTag(tag)}

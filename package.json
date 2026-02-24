@@ -2,11 +2,14 @@
   "name": "emily-li-portfolio",
   "version": "1.0.0",
   "type": "module",
+  "homepage": "https://peizhen23emily.github.io/EmilyLi",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -15,9 +18,10 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.1",
-    "vite": "^5.0.0",
-    "tailwindcss": "^3.3.0",
+    "autoprefixer": "^10.4.16",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.4.31",
-    "autoprefixer": "^10.4.16"
+    "tailwindcss": "^3.3.0",
+    "vite": "^5.0.0"
   }
 }

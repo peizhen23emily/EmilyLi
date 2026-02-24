@@ -16,8 +16,7 @@ export default function Home() {
           {/* Left Content */}
           <div className="flex flex-col justify-center">
             <h1 className="text-5xl md:text-6xl font-bold text-dark mb-6 leading-tight">
-              Peizhen <br />
-              <span className="text-navy">(Emily) Li</span>
+              Peizhen <span className="text-navy">(Emily)</span> Li
             </h1>
             <p className="text-xl md:text-2xl text-dark mb-2 font-light">
               Instructional Designer & Learning Analytics
@@ -34,7 +33,7 @@ export default function Home() {
                 View My Work
               </Link>
               <a
-                href="mailto:emily@emilyli.com"
+                href="mailto:peizhenli723@gmail.com"
                 className="px-8 py-3 border-2 border-navy text-navy rounded-lg font-medium hover:bg-navy hover:text-cream transition"
               >
                 Get in Touch
@@ -80,10 +79,10 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-dark mb-12 text-center">Explore</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {[
-              { icon: '📁', title: 'Projects', link: '/projects', desc: 'View my work' },
-              { icon: '🏃🏻‍♀️', title: 'About Me', link: '/about', desc: 'Learn more' },
-              { icon: '📄', title: 'Resume', link: '/resume', desc: 'Download CV' },
-              { icon: '✉️', title: 'Contact', link: '/', desc: 'Get in touch', onClick: () => window.location.href = 'mailto:emily@emilyli.com' },
+              { icon: '📁', title: 'Projects', link: '/projects' },
+              { icon: '🏃🏻‍♀️', title: 'About Me', link: '/about' },
+              { icon: '📄', title: 'Resume', link: '/resume'},
+              { icon: '✉️', title: 'Contact', link: '/', onClick: () => window.location.href = 'mailto:emily@emilyli.com' },
             ].map((card, idx) => (
               <Link
                 key={idx}
@@ -149,7 +148,7 @@ export default function Home() {
             I'm always interested in hearing about new projects and interesting design challenges.
           </p>
           <a
-            href="mailto:emily@emilyli.com"
+            href="mailto:peizhenli723@gmail.com"
             className="inline-block px-8 py-3 bg-cream text-navy rounded-lg font-medium hover:bg-beige transition"
           >
             Get in Touch

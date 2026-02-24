@@ -10,8 +10,11 @@ import About from './pages/About'
 import Resume from './pages/Resume'
 
 function App() {
+  // Set basename for GitHub Pages deployment
+  const basename = import.meta.env.DEV ? '/' : '/EmilyLi/'
+  
   return (
-    <Router>
+    <Router basename={basename}>
       <div className="min-h-screen flex flex-col bg-cream text-dark">
         <Navbar />
         <main className="flex-1">
