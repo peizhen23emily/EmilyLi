@@ -6,7 +6,7 @@ export default function Projects() {
   const [selectedTag, setSelectedTag] = useState(null)
 
   // Limited tag filter - only show these tags
-  const allowedTags = ['UI Design', 'UX Research', 'Data Visualization', 'Instructional Design', 'Prototyping']
+  const allowedTags = ['UI/UX', 'Data Visualization', 'Prototype', 'Learning Analytics','Instructional Design','Critical Thinking']
   
   // Get unique tags that are in the allowed list
   const displayTags = allowedTags.filter(tag =>
