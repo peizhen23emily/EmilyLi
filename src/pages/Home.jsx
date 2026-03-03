@@ -11,10 +11,10 @@ export default function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center px-4 py-20 bg-cream">
+      <section className="min-h-screen flex items-center justify-center px-4 py-15 bg-cream">
         <div className="max-w-6xl mx-auto w-full">
           {/* Title and Subtitle */}
-          <div className="mb-12 text-center">
+          <div className="mb-4 text-center">
             <h1 className="text-5xl md:text-6xl font-bold text-dark mb-6 leading-tight">
               <span className="relative group cursor-pointer inline-block">
                 <span className="group-hover:opacity-0 transition-opacity duration-300">Peizhen Li</span>
@@ -24,15 +24,15 @@ export default function Home() {
           </div>
 
           {/* Main Content - WordCloud on Left/Right, Photo in Center */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start mb-12">
+          <div className="relative grid grid-cols-1 md:grid-cols-12 gap-8 items-center mb-12" style={{ minHeight: '800px' }}>
             {/* Left - WordCloud */}
-            <div className="md:col-span-3 flex items-start justify-center">
+            <div className="hidden md:flex md:col-span-3 items-start justify-center">
               <WordCloud side="left" />
             </div>
 
             {/* Center - Professional Photo with Buttons Below */}
-            <div className="md:col-span-6 flex flex-col items-center gap-6">
-              <div className="w-full max-w-lg aspect-square rounded-2xl overflow-hidden shadow-lg bg-beige">
+            <div className="col-span-1 md:col-span-6 flex flex-col items-center gap-6">
+              <div className="w-full max-w-md aspect-square rounded-2xl overflow-hidden shadow-lg bg-beige">
                 <img
                   src="https://i.imgur.com/1tdfdAE.jpeg"
                   alt="Peizhen (Emily) Li"
@@ -58,7 +58,7 @@ export default function Home() {
             </div>
 
             {/* Right - WordCloud */}
-            <div className="md:col-span-3 flex items-start justify-center">
+            <div className="hidden md:flex md:col-span-3 items-start justify-center">
               <WordCloud side="right" />
             </div>
           </div>
@@ -66,7 +66,7 @@ export default function Home() {
       </section>
 
       {/* Quick Navigation Cards */}
-      <section className="py-16 px-4 bg-beige">
+      <section className="py-8 px-4 bg-beige">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-dark mb-12 text-center">Explore</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">

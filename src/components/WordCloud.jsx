@@ -20,7 +20,7 @@ const words = [
   { text: 'engagement', weight: 'small' },
   { text: 'e-learning', weight: 'large' },
   { text: 'Personalization', weight: 'large', highlighted: true },
-  { text: 'R Studio', weight: 'small' },
+  { text: 'R Studio', weight: 'medium' },
   { text: 'design thinking', weight: 'medium' },
   { text: 'SQL', weight: 'medium' },
 ]
@@ -33,28 +33,28 @@ const weightStyle = {
 }
 
 const positions = [
-  { top: 25, left: 2 },
-  { top: 35, left: 72 },
-  { top: 5, left: 80 },
-  { top: 70, left: 5 },
+  { top: 7, left: 2 },
+  { top: 6, left: 72 },
+  { top: 13, left: 80 },
+  { top: 27, left: 5 },
   { top: 41, left: 7 },
   { top: 30, left: 75 },
   { top: 48, left: 3 },
-  { top: 45, left: 78 },
+  { top: 21, left: 78 },
   { top: 60, left: 6 },
-  { top: 58, left: 72 },
-  { top: 75, left: 18 },
-  { top: 68, left: 76 },
-  { top: 84, left: 10 },
-  { top: 76, left: 82 },
-  { top: 90, left: 10 },
-  { top: 88, left: 78 },
+  { top: 45, left: 72 },
+  { top: 55, left: 18 },
+  { top: 66, left: 80 },
+  { top: 34, left: 10 },
+  { top: 55, left: 82 },
+  { top: 36, left: 10 },
+  { top: 40, left: 73 },
   { top: 52, left: 88 },
-  { top: 35, left: 10 },
-  { top: 80, left: 80 },
-  { top: 92, left: 70 },
-  { top: 43, left: 20 },
-  { top: 95, left: 75 },
+  { top: 15, left: 10 },
+  { top: 35, left: 80 },
+  { top: 27, left: 90 },
+  { top: 42, left: 20 },
+  { top: 63, left: 75 },
 ]
 
 export default function WordCloud() {
@@ -63,7 +63,6 @@ export default function WordCloud() {
   useEffect(() => {
     const timers = []
     words.forEach((word, idx) => {
-      if (word.highlighted) return
       const startDelay = Math.random() * 3000
       const t = setTimeout(() => {
         const id = setInterval(() => {
@@ -72,7 +71,7 @@ export default function WordCloud() {
             next[idx] = !next[idx]
             return next
           })
-        }, 2000 + Math.random() * 3000)
+        }, 800 + Math.random() * 1200)
         timers.push(id)
       }, startDelay)
       timers.push(t)
@@ -93,7 +92,7 @@ export default function WordCloud() {
               left: `${pos.left}%`,
               ...weightStyle[word.weight],
               color: word.highlighted ? '#c0614a' : '#2d2d2d',
-              opacity: word.highlighted ? 0.85 : visible[idx] ? 0.5 : 0.08,
+              opacity: visible[idx] ? (word.highlighted ? 0.85 : 0.5) : 0.08,
               transition: 'opacity 1.4s ease',
               whiteSpace: 'nowrap',
               animation: word.highlighted
