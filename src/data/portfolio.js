@@ -58,7 +58,7 @@ export const projects = [
   {
     id: 'project-5',
     title: 'When Do Students Start to Learn?',
-    tags: ['Learning Analytics', 'Data Visualization'],
+    tags: ['Learning Analytics', 'Data Visualization','Academic Writing'],
     description: 'A study investigating how the timing of exam preparation relates to academic performance among undergraduates in an introductory biology course.',
     image: 'https://i.imgur.com/ylCs4iV.png',
     pdfFile: 'LAK26.pdf',
@@ -112,6 +112,14 @@ export const experience = [
     description: 'Synthesized daily venue transition and mission-critical reports from all competition sites to provide the Executive Command with real-time situational awareness. Provided simultaneous interpretation and technical translation for\nJing Zhao (FISU Games Director) during strategic meetings between FISU and the Main Coperation Center teams.'
   }
 ]
+
+export const skills = {
+  design: ['UI/UX Design', 'Wireframing', 'Prototyping', 'User Research', 'Interaction Design',],
+  tools: ['Figma', 'R Studio', 'Looker Studio', 'Articulate 360', 'Microsoft Office Suite', 'Adobe Creative Suite', 'Miro', 'Qualtrics'],
+  research: ['User Interviews', 'Usability Testing', 'Data Analysis', 'Survey Design'],
+  other: ['Accessibility (WCAG)', 'Design Thinking']
+}
+
 export const socialLinks = {
   email: 'peizhenli723@gmail.com',
   linkedin: 'https://www.linkedin.com/in/peizhen-li-156b5427b',

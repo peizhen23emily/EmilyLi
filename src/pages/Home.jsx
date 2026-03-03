@@ -1,74 +1,66 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ProjectCard from '../components/ProjectCard'
-import Timeline from '../components/Timeline'
+import WordCloud from '../components/wordcloud'
+import WorldMap from '../components/WorldMap'
 import { projects, experience } from '../data/portfolio'
 
 export default function Home() {
   const featuredProjects = projects.slice(0, 3)
-  const timelineItems = experience.slice(0, 3)
 
   return (
     <div>
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center px-4 py-20 bg-cream">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div className="flex flex-col justify-center">
+        <div className="max-w-6xl mx-auto w-full">
+          {/* Title and Subtitle */}
+          <div className="mb-12 text-center">
             <h1 className="text-5xl md:text-6xl font-bold text-dark mb-6 leading-tight">
-              Peizhen <span className="text-navy">(Emily)</span> Li
+              <span className="relative group cursor-pointer inline-block">
+                <span className="group-hover:opacity-0 transition-opacity duration-300">Peizhen Li</span>
+                <span className="absolute left-0 top-0 opacity-0 group-hover:opacity-100 text-navy transition-opacity duration-300">Emily</span>
+              </span>
             </h1>
-            <p className="text-xl md:text-2xl text-dark mb-2 font-light">
-              Instructional Designer & Learning Analytics
-            </p>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              I design digital experiences that both benefit the instructors and students in different aspects. 
-              Currently focused on trace the raw data of students click streams and ultmately build mastry leanirng paths for students.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link
-                to="/projects"
-                className="px-8 py-3 bg-navy text-cream rounded-lg font-medium hover:bg-dark transition"
-              >
-                View My Work
-              </Link>
-              <a
-                href="mailto:peizhenli723@gmail.com"
-                className="px-8 py-3 border-2 border-navy text-navy rounded-lg font-medium hover:bg-navy hover:text-cream transition"
-              >
-                Get in Touch
-              </a>
-            </div>
           </div>
 
-          {/* Right Content - Professional Photo Placeholder */}
-          <div className="flex justify-center">
-            <div className="w-full max-w-sm aspect-square rounded-2xl overflow-hidden shadow-lg bg-beige">
-              <img
-                src="https://i.imgur.com/1tdfdAE.jpeg"
-                alt="Peizhen (Emily) Li"
-                className="w-full h-full object-cover"
-              />
+          {/* Main Content - WordCloud on Left/Right, Photo in Center */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start mb-12">
+            {/* Left - WordCloud */}
+            <div className="md:col-span-3 flex items-start justify-center">
+              <WordCloud side="left" />
             </div>
-          </div>
-        </div>
 
-        {/* Scroll Down Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 md:block hidden">
-          <div className="animate-bounce">
-            <svg
-              className="w-6 h-6 text-navy"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-              />
-            </svg>
+            {/* Center - Professional Photo with Buttons Below */}
+            <div className="md:col-span-6 flex flex-col items-center gap-6">
+              <div className="w-full max-w-lg aspect-square rounded-2xl overflow-hidden shadow-lg bg-beige">
+                <img
+                  src="https://i.imgur.com/1tdfdAE.jpeg"
+                  alt="Peizhen (Emily) Li"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              
+              {/* Buttons Below Photo */}
+              <div className="flex flex-col gap-3 w-full max-w-lg">
+                <Link
+                  to="/projects"
+                  className="px-8 py-3 bg-navy text-cream rounded-lg font-medium hover:bg-dark transition text-center"
+                >
+                  View My Work
+                </Link>
+                <a
+                  href="mailto:peizhenli723@gmail.com"
+                  className="px-8 py-3 border-2 border-navy text-navy rounded-lg font-medium hover:bg-navy hover:text-cream transition text-center"
+                >
+                  Get in Touch
+                </a>
+              </div>
+            </div>
+
+            {/* Right - WordCloud */}
+            <div className="md:col-span-3 flex items-start justify-center">
+              <WordCloud side="right" />
+            </div>
           </div>
         </div>
       </section>
@@ -104,15 +96,7 @@ export default function Home() {
       {/* Featured Projects */}
       <section className="py-20 px-4 bg-cream">
         <div className="max-w-6xl mx-auto">
-          <div className="flex justify-between items-center mb-12">
-            <h2 className="text-3xl font-bold text-dark">Featured Projects</h2>
-            <Link
-              to="/projects"
-              className="text-navy hover:text-dark font-medium transition"
-            >
-              View All →
-            </Link>
-          </div>
+          <h2 className="text-3xl font-bold text-dark mb-12 text-center">Featured Projects</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {featuredProjects.map((project) => (
@@ -122,20 +106,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Timeline Section */}
+      {/* World Map Section - Places Waited to be Unlocked */}
       <section className="py-20 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-dark mb-16 text-center">
-            Experience & Education
+          <h2 className="text-3xl font-bold text-dark mb-12 text-center">
+            Check Out My Journey through the World!
           </h2>
-          <Timeline items={timelineItems} />
-          <div className="mt-12 text-center">
-            <Link
-              to="/about"
-              className="inline-block px-8 py-3 border-2 border-navy text-navy rounded-lg font-medium hover:bg-navy hover:text-cream transition"
-            >
-              View Full Timeline
-            </Link>
+          <div className="rounded-lg overflow-hidden shadow-lg" style={{ height: '600px' }}>
+            <WorldMap />
           </div>
         </div>
       </section>

@@ -21,7 +21,7 @@ export default function ProjectCard({ project }) {
         <p className="text-sm text-gray-600 mb-3 flex-grow">
           {project.description}
         </p>
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-wrap gap-2">
           {project.tags.map((tag) => (
             <span
               key={tag}
@@ -31,9 +31,6 @@ export default function ProjectCard({ project }) {
             </span>
           ))}
         </div>
-        <button className="text-sm font-medium text-navy hover:text-dark transition mt-auto">
-          View Project →
-        </button>
       </div>
     </Link>
   )
