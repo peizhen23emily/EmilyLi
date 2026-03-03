@@ -96,7 +96,7 @@ export default function WordCloud() {
               transition: 'opacity 1.4s ease',
               whiteSpace: 'nowrap',
               animation: word.highlighted
-                ? `float ${3 + idx * 0.3}s ease-in-out infinite alternate`
+                ? `float ${1.5 + idx * 0.2}s ease-in-out infinite alternate`
                 : undefined,
             }}
           >
@@ -107,7 +107,7 @@ export default function WordCloud() {
       <style>{`
         @keyframes float {
           0% { transform: translateY(0px); }
-          100% { transform: translateY(-10px); }
+          100% { transform: translateY(-35px); }
         }
       `}</style>
     </div>
