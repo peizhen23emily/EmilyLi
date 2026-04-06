@@ -39,7 +39,7 @@ export default function Navbar() {
               </Link>
             ))}
             <a
-              href="mailto:emily@emilyli.com"
+              href="mailto:peizhenli723@gmail.com"
               className="text-sm font-medium text-dark hover:text-navy transition"
             >
               Contact
@@ -85,7 +85,7 @@ export default function Navbar() {
               </Link>
             ))}
             <a
-              href="mailto:emily@emilyli.com"
+              href="mailto:peizhenli723@gmail.com"
               onClick={() => setIsOpen(false)}
               className="block px-3 py-2 rounded text-sm font-medium text-dark hover:bg-beige transition"
             >
