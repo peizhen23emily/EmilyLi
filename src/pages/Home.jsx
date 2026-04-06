@@ -73,8 +73,8 @@ export default function Home() {
             {[
               { icon: '📁', title: 'Projects', link: '/projects' },
               { icon: '🏃🏻‍♀️', title: 'About Me', link: '/about' },
-              { icon: '📄', title: 'Resume', link: '/resume'},
-              { icon: '✉️', title: 'Contact', link: '/', onClick: () => window.location.href = 'mailto:emily@emilyli.com' },
+              { icon: '📄', title: 'Resume', link: '/resume1'},
+              { icon: '✉️', title: 'Contact', link: '/', onClick: () => window.location.href = 'mailto:peizhenli723@gmail.com' },
             ].map((card, idx) => (
               <Link
                 key={idx}

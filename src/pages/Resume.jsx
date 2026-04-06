@@ -33,7 +33,7 @@ export default function Resume() {
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-3xl font-bold text-dark">My Resume</h2>
             <a
-              href="/EmilyLi/resume.pdf"
+              href="/EmilyLi/resume1.pdf"
               download="Peizhen_Emily_Li_Resume.pdf"
               className="px-6 py-2 bg-navy text-cream rounded-lg font-medium hover:bg-dark transition flex items-center gap-2"
             >
@@ -47,7 +47,7 @@ export default function Resume() {
           {/* Embedded PDF Viewer */}
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
             <iframe
-              src="/EmilyLi/resume.pdf#toolbar=1&navpanes=0&scrollbar=1"
+              src="/EmilyLi/resume1.pdf#toolbar=1&navpanes=0&scrollbar=1"
               className="w-full"
               style={{ minHeight: '800px' }}
               title="Resume PDF"
@@ -56,7 +56,7 @@ export default function Resume() {
           
           {/* Fallback message */}
           <p className="text-center text-gray-600 mt-4 text-sm">
-            If the PDF doesn't display, you can <a href="/EmilyLi/resume.pdf" download className="text-navy font-medium hover:underline">download it here</a>.
+            If the PDF doesn't display, you can <a href="/EmilyLi/resume1.pdf" download className="text-navy font-medium hover:underline">download it here</a>.
           </p>
         </div>
       </section>
