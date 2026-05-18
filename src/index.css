@@ -10,33 +10,80 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
-  background-color: #f5f1ed;
-  color: #1a1a1a;
+  font-family: 'Instrument Sans', -apple-system, system-ui, sans-serif;
+  background-color: #F6F3EE;
+  color: #1A1816;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Smooth transitions */
+::selection {
+  background: #E8CFCA;
+  color: #1A1816;
+}
+
 a, button {
   transition: all 0.3s ease;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+/* ═══════════════════════════════════════════
+   FONT CLASSES — defined directly in CSS
+   so they work even if tailwind.config.js
+   doesn't hot-reload properly.
+   ═══════════════════════════════════════════ */
+@layer utilities {
+  .font-display {
+    font-family: 'DM Serif Display', Georgia, serif;
+  }
+  .font-body {
+    font-family: 'Instrument Sans', -apple-system, sans-serif;
+  }
+  .font-editorial {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: #ede8e0;
+/* ─── Color classes (backup if config not picked up) ─── */
+@layer utilities {
+  .text-accent  { color: #C4553A; }
+  .text-secondary { color: #6B635A; }
+  .text-tertiary { color: #9B9389; }
+  .bg-cream     { background-color: #F6F3EE; }
+  .bg-beige     { background-color: #EEEBE4; }
+  .bg-dark      { background-color: #1A1816; }
+  .text-dark    { color: #1A1816; }
+  .border-border { border-color: #DDD8D0; }
+  .bg-border    { background-color: #DDD8D0; }
+  .from-cream   { --tw-gradient-from: #F6F3EE; }
+  .to-transparent { --tw-gradient-to: transparent; }
 }
 
-::-webkit-scrollbar-thumb {
-  background: #2c3e50;
-  border-radius: 4px;
+/* ─── Marquee ─── */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #1a1a1a;
+/* ─── Fade Up (hero stagger) ─── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}
+
+.animate-fade-up {
+  opacity: 0;
+  animation: fade-up 0.8s ease-out forwards;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #EEEBE4; }
+::-webkit-scrollbar-thumb { background: #9B9389; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #6B635A; }

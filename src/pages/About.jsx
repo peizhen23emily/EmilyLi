@@ -1,231 +1,229 @@
-import React, { useState, useEffect, useRef } from 'react'
-import Timeline from '../components/Timeline'
-import { experience, skills, socialLinks } from '../data/portfolio'
+import React, { useEffect, useState, useRef } from 'react'
+import WorldMap from '../components/WorldMap'
+import { experience, socialLinks } from '../data/portfolio'
 
-export default function About() {
-  const [visibleItems, setVisibleItems] = useState([])
-  const timelineRef = useRef(null)
+/* ─── Shared: Reveal on Scroll ─── */
+function Reveal({ children, className = '', delay = 0 }) {
+  const ref = useRef(null)
+  const [visible, setVisible] = useState(false)
 
-  // Scroll animation for timeline
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setVisibleItems((prev) => [...new Set([...prev, entry.target.dataset.index])])
-        }
-      })
-    }, { threshold: 0.1 })
-
-    const items = timelineRef.current?.querySelectorAll('[data-index]')
-    items?.forEach((item) => observer.observe(item))
-
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.unobserve(el) } },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    )
+    observer.observe(el)
     return () => observer.disconnect()
   }, [])
 
   return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'} ${className}`}
+      style={{ transitionDelay: `${delay}s` }}
+    >
+      {children}
+    </div>
+  )
+}
+
+/* ─── Section Header ─── */
+function SectionHeader({ title, subtitle }) {
+  return (
+    <Reveal>
+      <div className="mb-12 md:mb-16">
+        <h2 className="font-display text-3xl md:text-4xl font-normal tracking-tight text-dark">
+          {title}
+        </h2>
+        {subtitle && (
+          <p className="text-secondary mt-3 text-base md:text-lg max-w-xl">{subtitle}</p>
+        )}
+      </div>
+    </Reveal>
+  )
+}
+
+
+export default function About() {
+  return (
     <div className="bg-cream min-h-screen">
-      {/* Bio Section - Two Parts */}
-      <section className="py-20 px-4 border-b border-beige">
-        <div className="max-w-6xl mx-auto">
-          <h1 className="text-5xl font-bold text-dark mb-12">About Me</h1>
-          
-          {/* Professional Bio */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start mb-20">
+
+      {/* ─── PAGE HEADER ─── */}
+      <section className="pt-32 pb-8 px-6 md:px-16">
+        <div className="max-w-5xl mx-auto">
+          <h1 className="font-display text-[2.5rem] md:text-6xl font-normal leading-[1.15] tracking-tight text-dark animate-fade-up" style={{ animationDelay: '0.15s' }}>
+            The person behind <br/>
+            <span className="font-editorial italic font-light text-#7D7D7D">the pixels</span>
+          </h1>
+        </div>
+      </section>
+
+      {/* ─── PROFESSIONAL BIO ─── */}
+      <section className="py-16 md:py-20 px-6 md:px-16">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
             {/* Photo */}
-            <div className="md:col-span-1">
-              <div className="w-full aspect-square rounded-xl overflow-hidden shadow-lg bg-beige">
+            <Reveal>
+              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-md">
                 <img
-                  src="https://i.imgur.com/ojbrEr6.jpeg"
-                  alt="Peizhen (Emily) Li - Professional"
+                  src="https://imgur.com/En1DTxL.jpeg"
+                  alt="Peizhen (Emily) Li — Professional"
                   className="w-full h-full object-cover"
                 />
               </div>
-            </div>
+            </Reveal>
 
-            {/* Professional Bio Text */}
-            <div className="md:col-span-1">
-              <h2 className="text-3xl font-bold text-dark mb-4">My Professional Journey</h2>
-              <p className="text-lg text-gray-700 mb-4 leading-relaxed">
-                Hi! I'm Peizhen, but most people call me Emily. I'm an instructional designer and learning analytics specialist with 2 years of experience creating personalized and adaptive digital experiences.
-              </p>
-              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                I'm passionate about understanding user needs through research and translating those insights into thoughtful design solutions. My background spans Education, Educational Technology, and Data Analysis, giving me expertise in complex problem spaces.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <a
-                  href={`mailto:${socialLinks.email}`}
-                  className="px-6 py-2 bg-navy text-cream rounded-lg font-medium hover:bg-dark transition"
-                >
-                  Email Me
-                </a>
-                {socialLinks.linkedin && (
-                  <a
-                    href={socialLinks.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-6 py-2 border-2 border-navy text-navy rounded-lg font-medium hover:bg-navy hover:text-cream transition"
-                  >
-                    LinkedIn
-                  </a>
-                )}
+            {/* Text */}
+            <Reveal delay={0.1}>
+              <div>
+                <h2 className="font-display text-2xl md:text-3xl font-normal tracking-tight text-dark mb-6">
+                  Of course I'm academic!
+                </h2>
+                <p className="text-base md:text-[1.0625rem] text-secondary leading-[1.8] mb-5">
+                  I remember the first time I left home and flew all the way to UK in 2021 to begin my journey in education. At that point, I'm very curious on how human-like robotics could impact neurodivergent kids's way of expressing themselves. After 3 years of research and practice into different eductaional topics,
+                  I found out exploring pedagogical solutions in the intersection of education and technology is what I truly enjoy. Especially after writing so many academic essays, I realized I'm not the person who just curious about how the the educational policy and stuff going on each day, I'm more care about the outcome of students after they receive certain interventions. Which is now my current interest and focus as an learning analytcis. Where students' learning patterns and needs come first, and technology is just a tool to support that. I'm a
+                  learning analytics with 2 years of experience creating personalized and
+                  adaptive digital experiences.
+                  (Photo shoot in Chapel Hill, NC)
+                </p>
               </div>
-            </div>
+            </Reveal>
           </div>
+        </div>
+      </section>
 
-          {/* Sporty & Personal Lifestyle Bio */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-            {/* Personal Bio Text */}
-            <div className="md:col-span-1 md:order-2">
-              <h2 className="text-3xl font-bold text-dark mb-4">The Sporty Side of Me</h2>
-              <p className="text-lg text-gray-700 mb-4 leading-relaxed">
-                Beyond my work as a designer, I'm a passionate sports enthusiast who believes movement and creativity go hand in hand. I won third place in a cross-country race in high school, and recently I've been practicing table tennis—a skill my grandparents taught me when I was just five years old.
-              </p>
-              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                I'm also a dedicated Americano lover (yes, just Americano!) and a CD & Vinyl collector. I love discovering record stores in every city I visit. For me, sports, music, and good coffee aren't just hobbies—they're what keep my life balanced and grounded. They remind me that design is just one part of living fully and authentically.
-              </p>
-            </div>
+      {/* ─── SPORTY / PERSONAL BIO ─── */}
+      <section className="py-16 md:py-20 px-6 md:px-16">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
+            {/* Text (left on desktop) */}
+            <Reveal>
+              <div className="md:order-1">
+                <h2 className="font-display text-2xl md:text-3xl font-normal tracking-tight text-dark mb-6">
+                  But I'm also sporty and fun!
+                </h2>
+                <p className="text-base md:text-[1.0625rem] text-secondary leading-[1.8] mb-5">
+                  Beyond my academic pursuits, I'm a passionate sports enthusiast who believes movement
+                  and creativity go hand in hand. I won third place in a cross-country race in high school,
+                  and recently I've been practicing table tennis — a skill my grandparents taught me when I
+                  was just five years old.
+                </p>
+                <p className="text-base md:text-[1.0625rem] text-secondary leading-[1.8]">
+                  I'm also a dedicated Americano lover (yes, just Americano!) and a CD & Vinyl collector.
+                  I love discovering record stores in every city I visit. My friend once asked me what humans need to bring if someday we have to live on another planet, and I said 'music'. Music is the one thing that can always bring me comfort and joy, no matter where I am in the world.
+                  (Photo shoot in Fethiye, Turkey)
+                </p>
+              </div>
+            </Reveal>
 
-            {/* Photo Placeholder */}
-            <div className="md:col-span-1 md:order-1">
-              <div className="w-full aspect-square rounded-xl overflow-hidden shadow-lg">
+            {/* Photo (right on desktop) */}
+            <Reveal delay={0.1}>
+              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-md md:order-2">
                 <img
-                  src="https://i.imgur.com/s0exbZl.jpeg"
+                  src="https://imgur.com/gKHTWJX.jpeg"
                   alt="Emily's sporty lifestyle"
                   className="w-full h-full object-cover"
                 />
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Horizontal Timeline */}
-      <section className="py-20 px-4 bg-cream">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-dark mb-12">Experience & Education</h2>
-          <div 
-            ref={timelineRef}
-            className="flex overflow-x-auto pb-6 gap-6 snap-x snap-mandatory"
-            style={{ scrollBehavior: 'smooth' }}
-          >
+      {/* ─── EXPERIENCE & EDUCATION ─── */}
+      <section className="py-16 md:py-20 px-6 md:px-16 bg-beige">
+        <div className="max-w-5xl mx-auto">
+          <SectionHeader title="Experience & Education" />
+
+          <div className="space-y-6">
             {experience.map((item, idx) => (
-              <div
-                key={idx}
-                data-index={idx}
-                className={`flex-shrink-0 w-full md:w-96 transition-all duration-500 transform ${
-                  visibleItems.includes(String(idx))
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-4'
-                }`}
-              >
-                <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-navy h-full">
-                  <div className="flex items-center gap-2 mb-3">
-                    {item.type === 'education' || item.type === 'Education' ? (
-                      <span className="text-2xl">🎓</span>
-                    ) : (
-                      <span className="text-2xl">💼</span>
-                    )}
-                    <span className="text-xs font-bold text-navy uppercase">
+              <Reveal key={idx} delay={idx * 0.06}>
+                <div className="flex gap-6 md:gap-10 items-start group">
+                  {/* Date column */}
+                  <div className="w-28 md:w-36 shrink-0 pt-1">
+                    <span className="text-xs font-semibold tracking-[0.08em] uppercase text-#7D7D7D">
                       {item.type}
                     </span>
+                    <p className="text-sm text-tertiary mt-1 font-body">{item.date}</p>
                   </div>
-                  
-                  <h3 className="text-lg font-bold text-dark mb-1">
-                    {item.title}
-                  </h3>
-                  <p className="text-navy font-semibold mb-1">{item.organization}</p>
-                  <p className="text-sm text-gray-600 mb-3">{item.date}</p>
-                  <p className="text-sm text-gray-700">{item.description}</p>
+
+                  {/* Content */}
+                  <div className="flex-1 pb-6 border-b border-border group-last:border-0">
+                    <h3 className="font-display text-lg font-normal tracking-tight text-dark mb-1">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm font-medium text-secondary mb-2">
+                      {item.organization}
+                    </p>
+                    <p className="text-sm text-tertiary leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
-          <p className="text-sm text-gray-500 mt-4 text-center">← Scroll to see more →</p>
         </div>
       </section>
 
-      {/* Personal Interests - Photo Gallery */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-dark mb-12">Beyond Work</h2>
-          <div className="flex overflow-x-auto pb-6 gap-6 snap-x snap-mandatory" style={{ scrollBehavior: 'smooth' }}>
+      {/* ─── WORLD MAP ─── */}
+      <section className="py-16 md:py-20 px-6 md:px-16">
+        <div className="max-w-5xl mx-auto">
+          <SectionHeader
+            title="My Journey"
+            subtitle="Places I've called home and cities I've explored along the way."
+          />
+          <Reveal>
+            <div className="rounded-xl overflow-hidden shadow-sm border border-border" style={{ height: '520px' }}>
+              <WorldMap />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ─── MOST MEMORABLE MOMENTS ─── */}
+      <section className="py-16 md:py-20 px-6 md:px-16 bg-dark text-cream">
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <div className="mb-12 md:mb-16">
+              <h1 className="font-display text-3xl md:text-4xl font-normal tracking-tight text-cream">
+                Most Memorable Moments in Life
+              </h1>
+            </div>
+          </Reveal>
+
+          {/* Photo mosaic grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {[
-              {
-                image: 'https://i.imgur.com/TsR1nbz.jpeg',
-              },
-              {
-                image: 'https://i.imgur.com/qqe6Q1X.jpeg',
-              },
-              {
-                image: 'https://i.imgur.com/5H9JiMC.jpeg',
-              },
-              {
-                image: 'https://i.imgur.com/dJWfoHG.jpeg',
-              },
-              {
-                image: 'https://i.imgur.com/QRW31j9.jpeg',
-              },
-              {
-                image: 'https://i.imgur.com/CXZAUo5.jpeg',
-              },
-              {
-                image: 'https://i.imgur.com/yT8CNbb.jpeg',
-              },
-              {
-                image: 'https://i.imgur.com/agIi2Mc.jpeg',
-              },
-            ].map((interest, idx) => (
-              <div
-                key={idx}
-                className="flex-shrink-0 w-full md:w-96 group cursor-pointer"
-              >
-                <div className="relative overflow-hidden rounded-xl h-80 md:h-96">
-                  <img
-                    src={interest.image}
-                    alt="Emily's lifestyle moment"
-                    className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent flex items-end justify-start p-6 opacity-0 group-hover:opacity-100 transition duration-300">
-                    <div className="text-white">
-                      <p className="text-3xl mb-2">{interest.emoji}</p>
-                      <h3 className="text-xl font-bold">{interest.title}</h3>
-                    </div>
+              { src: 'https://i.imgur.com/TsR1nbz.jpeg', span: 'col-span-2 row-span-2' },
+              { src: 'https://i.imgur.com/qqe6Q1X.jpeg', span: 'col-span-1' },
+              { src: 'https://i.imgur.com/5H9JiMC.jpeg', span: 'col-span-1' },
+              { src: 'https://i.imgur.com/dJWfoHG.jpeg', span: 'col-span-1' },
+              { src: 'https://i.imgur.com/QRW31j9.jpeg', span: 'col-span-1' },
+              { src: 'https://i.imgur.com/CXZAUo5.jpeg', span: 'col-span-1' },
+              { src: 'https://i.imgur.com/yT8CNbb.jpeg', span: 'col-span-1' },
+              { src: 'https://i.imgur.com/agIi2Mc.jpeg', span: 'col-span-2' },
+            ].map((photo, idx) => (
+              <Reveal key={idx} delay={idx * 0.05}>
+                <div
+                  className={`${photo.span} group overflow-hidden rounded-lg cursor-pointer`}
+                >
+                  <div className={`w-full ${photo.span.includes('row-span-2') ? 'h-full min-h-[320px] md:min-h-[420px]' : photo.span.includes('col-span-2') ? 'h-48 md:h-64' : 'h-40 md:h-52'} overflow-hidden`}>
+                    <img
+                      src={photo.src}
+                      alt="A memorable moment"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
                   </div>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
-          <p className="text-sm text-gray-500 mt-4 text-center">← Scroll to see more →</p>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 px-4 bg-navy text-cream">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6">Let's Connect</h2>
-          <p className="text-lg mb-8 opacity-90">
-            Interested in collaborating or just want to chat about design, sports, or good coffee? I'd love to hear from you!
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <a
-              href={`mailto:${socialLinks.email}`}
-              className="px-8 py-3 bg-cream text-navy rounded-lg font-medium hover:bg-beige transition"
-            >
-              Send Email
-            </a>
-            {socialLinks.linkedin && (
-              <a
-                href={socialLinks.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-3 border-2 border-cream text-cream rounded-lg font-medium hover:bg-cream hover:text-navy transition"
-              >
-                Visit LinkedIn
-              </a>
-            )}
-          </div>
-        </div>
-      </section>
     </div>
   )
 }

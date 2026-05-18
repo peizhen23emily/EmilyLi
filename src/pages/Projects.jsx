@@ -23,10 +23,7 @@ export default function Projects() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-16">
-          <h1 className="text-5xl font-bold text-dark mb-4">Selected Projects</h1>
-          <p className="text-xl text-gray-600">
-            A curated collection of my recent work in UX/Product design
-          </p>
+          <h1 className="text-5xl font-display text-dark mb-4">Selected Projects</h1>
         </div>
 
         {/* Tag Filter */}
